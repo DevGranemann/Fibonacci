@@ -9,26 +9,22 @@
 <body>
 <main>
     <?php
+        if (isset($_REQUEST['limite']) && is_numeric($_REQUEST['limite'])) {
 
-        $primeiroValor = 0;
-        $segundoValor = 1;
-        $contador;
-        $limite = $_REQUEST['limite'];
+            $resultados = [1, 1];
+            $limite = $_REQUEST['limite'] - 1;
 
-        print "<h2>Os primeiros $limite da sequência de Fibonacci são:</h2>";
-        print "<p>$primeiroValor, $segundoValor";
+            print "<h1>Resultados:";
 
-        for ($contador = 3; $contador <= $limite; $contador ++) {
-            
-            $resultado = $primeiroValor + $segundoValor;
+            for ($contador = 2; $contador <= $limite; $contador ++) {
+                $resultados[] = $resultados[$contador - 1] + $resultados[$contador - 2];
+            }
 
-            print ", $resultado";
+            foreach ($resultados as $resultado)  {
+                print "\n" . $resultado . "</h1>";
+            }
 
-            $primeiroValor = $segundoValor;
-            $segundoValor = $resultado;
         }
-
-        print "</p>";
     ?>
     <button onclick="javascript:history.go(-1)">Voltar</button>
 </main>
